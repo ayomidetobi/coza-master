@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 	{% load static %} 
-	<title>Home</title>
+	{% block title %}
+    <title> home</title>
+    {% endblock title %}
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -40,7 +42,7 @@ integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WT
 </head>
 <body>
 
-    <div class=" pt-4">
+    <div class=" pt-4 p-t-100">
         {% if messages %}
             {% for message in messages %}
             <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
