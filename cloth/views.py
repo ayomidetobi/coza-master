@@ -60,7 +60,7 @@ def signup(request):
             user = authenticate( username=username, password=password)
             user.save()
             login(request, user)
-            return redirect('index')
+            return redirect('cloth:product')
         else:
             messages.error(request, 'an error occurred while creating')
 
