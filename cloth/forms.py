@@ -1,6 +1,8 @@
 from django import forms
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
+from django.core.exceptions import ValidationError
+
 
 
 PAYMENT_CHOICES = (
@@ -8,26 +10,34 @@ PAYMENT_CHOICES = (
     ('P', 'Paystack')
 )
 
+def validator_fields(value):
+        if  len(value) <= 0:
+            raise ValidationError('this field is required')
+        else:
+            return value
+
 
 class CheckoutForm(forms.Form):
+    
     shipping_address = forms.CharField(required=False,widget=forms.TextInput(attrs={
         'class': ' stext-111 w-100 cl8 plh3 size-111 p-lr-15',
         'placeholder':'Apartment or suite'
-        }),label='')
+        }),label='',validators=[validator_fields])
+        
     shipping_address2 = forms.CharField(required=False,widget=forms.TextInput(attrs={
         'class': ' stext-111 w-100 cl8 plh3 size-111 p-lr-15',
         'placeholder':'Apartment or suite'
-        }),label='')
+        }),label='',validators=[validator_fields])
     shipping_country = CountryField(blank_label='Shipping Country').formfield(
         required=False,
         widget=CountrySelectWidget(attrs={
             'class': 'rs1-select2 rs2-select2 w-100 bor8 bg0 stext-111 cl8 plh3 size-111 p-lr-15 m-t-9',
             
-        }), label='')
+        }), label='',validators=[validator_fields])
     shipping_zip = forms.CharField(required=False,widget=forms.TextInput(attrs={
         'class': ' stext-111 w-100 cl8 plh3 size-111 p-lr-15',
         'placeholder':'Postcode / Zip'
-        }), label='')
+        }), label='',validators=[validator_fields])
 
     billing_address = forms.CharField(required=False)
     billing_address2 = forms.CharField(required=False)
@@ -46,6 +56,7 @@ class CheckoutForm(forms.Form):
 
     payment_option = forms.ChoiceField(
         widget=forms.RadioSelect, choices=PAYMENT_CHOICES)
+    
 
 
 class CouponForm(forms.Form):

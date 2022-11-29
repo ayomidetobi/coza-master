@@ -9,7 +9,9 @@ from django_countries.fields import CountryField
 CATEGORY_CHOICES = (
     ('M', 'men'),
     ('W', 'women'),
-    ('WA', 'watches')
+    ('WA', 'watches'),
+    ('B', 'bags'),
+    ('S', 'shoes'),
 )
 
 LABEL_CHOICES = (
@@ -63,7 +65,7 @@ class OrderItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     ordered = models.BooleanField(default=False)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=1)
+    quantity = models.IntegerField(default=0)
 
 
     def __str__(self):

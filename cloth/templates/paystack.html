@@ -1,0 +1,560 @@
+{% extends 'base.html' %}
+{% load static %}  {% load cart_template_tags %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <!-- Header -->
+  <header>
+	<!-- Header desktop -->
+	<div class="container-menu-desktop">
+		<!-- Topbar -->
+		<div class="top-bar">
+			<div class="content-topbar flex-sb-m h-full container">
+				<div class="left-top-bar">
+					Free shipping for standard order over $100
+				</div>
+
+				<div class="right-top-bar flex-w h-full">
+					<a href="#" class="flex-c-m trans-04 p-lr-25">
+						Help & FAQs
+					</a>
+
+					<a href="{% url 'cloth:signup' %}" class="flex-c-m trans-04 p-lr-25">
+						My Account
+					</a>
+
+					<a href="#" class="flex-c-m trans-04 p-lr-25">
+						EN
+					</a>
+
+					<a href="#" class="flex-c-m trans-04 p-lr-25">
+						USD
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="wrap-menu-desktop">
+			<nav class="limiter-menu-desktop container">
+				
+				<!-- Logo desktop -->		
+				<a href="{% url 'cloth:index' %}" class="logo">
+					<img src=" {% static 'images/icons/logo-01.png' %} " alt="IMG-LOGO">
+				</a>
+
+				<!-- Menu desktop -->
+				<div class="menu-desktop">
+					<ul class="main-menu">
+						<li class="active-menu">
+							<a href=" {% url 'cloth:index' %} ">Home</a>
+							<ul class="sub-menu">
+								<li><a href=" {% url 'cloth:index' %} ">Homepage 1</a></li>
+								<li><a href=" {% url 'cloth:home-02' %} ">Homepage 2</a></li>
+								<li><a href=" {% url 'cloth:home-03' %} ">Homepage 3</a></li>
+							</ul>
+						</li>
+
+						<li>
+							<a href=" {% url 'cloth:product' %} ">Shop</a>
+						</li>
+
+						<li class="label1" data-label1="hot">
+							<a href=" {% url 'cloth:shoping-cart' %} ">Features</a>
+						</li>
+
+						<li>
+							<a href=" {% url 'cloth:blog' %} ">Blog</a>
+						</li>
+
+						<li>
+							<a href=" {% url 'cloth:about' %} ">About</a>
+						</li>
+
+						<li>
+							<a href=" {% url 'cloth:contact' %} ">Contact</a>
+						</li>
+					</ul>
+				</div>	
+
+				<!-- Icon header -->
+				<div class="wrap-icon-header flex-w flex-r-m">
+					<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
+						<i class="zmdi zmdi-search"></i>
+					</div>
+
+					<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="{{request.user|cart_item_count}}">
+						<a href="{% url 'cloth:shoping-cart'%}"><i class="zmdi zmdi-shopping-cart"></i></a>
+					</div>
+
+					<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
+						<i class="zmdi zmdi-favorite-outline"></i>
+					</a>
+				</div>
+			</nav>
+		</div>	
+	</div>
+
+	<!-- Header Mobile -->
+	<div class="wrap-header-mobile">
+		<!-- Logo moblie -->		
+		<div class="logo-mobile">
+			<a href=" {% url 'cloth:index' %} "><img src=" {% static 'images/icons/logo-01.png' %} " alt="IMG-LOGO"></a>
+		</div>
+
+		<!-- Icon header -->
+		<div class="wrap-icon-header flex-w flex-r-m m-r-15">
+			<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
+				<i class="zmdi zmdi-search"></i>
+			</div>
+
+			<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="{{request.user|cart_item_count}}">
+				<a href="{% url 'cloth:shoping-cart'%}"><i class="zmdi zmdi-shopping-cart"></i></a>
+			</div>
+
+			<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
+				<i class="zmdi zmdi-favorite-outline"></i>
+			</a>
+		</div>
+
+		<!-- Button show menu -->
+		<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+			<span class="hamburger-box">
+				<span class="hamburger-inner"></span>
+			</span>
+		</div>
+	</div>
+
+
+	<!-- Menu Mobile -->
+	<div class="menu-mobile">
+		<ul class="topbar-mobile">
+			<li>
+				<div class="left-top-bar">
+					Free shipping for standard order over $100
+				</div>
+			</li>
+
+			<li>
+				<div class="right-top-bar flex-w h-full">
+					<a href="#" class="flex-c-m p-lr-10 trans-04">
+						Help & FAQs
+					</a>
+
+					<a href="{% url 'cloth:signup' %}" class="flex-c-m p-lr-10 trans-04">
+						My Account
+					</a>
+
+					<a href="#" class="flex-c-m p-lr-10 trans-04">
+						EN
+					</a>
+
+					<a href="#" class="flex-c-m p-lr-10 trans-04">
+						USD
+					</a>
+				</div>
+			</li>
+		</ul>
+
+		<ul class="main-menu-m">
+			<li>
+				<a href=" {% url 'cloth:index' %} ">Home</a>
+				<ul class="sub-menu-m">
+					<li><a href=" {% url 'cloth:index' %} ">Homepage 1</a></li>
+					<li><a href=" {% url 'cloth:home-02' %} ">Homepage 2</a></li>
+					<li><a href=" {% url 'cloth:home-03' %} ">Homepage 3</a></li>
+				</ul>
+				<span class="arrow-main-menu-m">
+					<i class="fa fa-angle-right" aria-hidden="true"></i>
+				</span>
+			</li>
+
+			<li>
+				<a href=" {% url 'cloth:product' %} ">Shop</a>
+			</li>
+
+			<li>
+				<a href=" {% url 'cloth:shoping-cart' %} " class="label1 rs1" data-label1="hot">Features</a>
+			</li>
+
+			<li>
+				<a href=" {% url 'cloth:blog' %} ">Blog</a>
+			</li>
+
+			<li>
+				<a href=" {% url 'cloth:about' %} ">About</a>
+			</li>
+
+			<li>
+				<a href=" {% url 'cloth:contact' %} ">Contact</a>
+			</li>
+		</ul>
+	</div>
+
+	<!-- Modal Search -->
+	<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
+		<div class="container-search-header">
+			<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
+				<img src=" {% static 'images/icons/icon-close2.png' %} " alt="CLOSE">
+			</button>
+
+			<form class="wrap-search-header flex-w p-l-15">
+				<button class="flex-c-m trans-04">
+					<i class="zmdi zmdi-search"></i>
+				</button>
+				<input class="plh3" type="text" name="search" placeholder="Search...">
+			</form>
+		</div>
+	</div>
+</header>
+
+	<!-- Cart -->
+	<div class="wrap-header-cart js-panel-cart">
+		<div class="s-full js-hide-cart"></div>
+
+		<div class="header-cart flex-col-l p-l-65 p-r-25">
+			<div class="header-cart-title flex-w flex-sb-m p-b-8">
+				<span class="mtext-103 cl2">
+					Your Cart
+				</span>
+
+				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+					<i class="zmdi zmdi-close"></i>
+				</div>
+			</div>
+			
+			<div class="header-cart-content flex-w js-pscroll">
+				{% for order_item in order.items.all %}
+				<ul class="header-cart-wrapitem w-full">
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src=" {{order_item.item.image.url}}" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								 {{order_item.item.title}}
+							</a>
+
+							<span class="header-cart-item-info">
+								{{order_item.quantity}} x {{order_item.item.price}}
+							</span>
+						</div>
+					</li>
+
+					
+
+					
+				</ul>
+				{% endfor %}
+				<div class="w-full">
+					<div class="header-cart-total w-full p-tb-40">
+						${{order.get_total|floatformat:2}}
+					</div>
+
+					<div class="header-cart-buttons flex-w w-full">
+						<a href=" {% url 'cloth:shoping-cart' %} " class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+							View Cart
+						</a>
+
+						<a href=" {% url 'cloth:shoping-cart' %} " class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+							Check Out
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<div class="container m-t-10">
+
+    <main>
+    
+  
+      <div class="row g-5">
+        <div class="col-md-12 col-lg-6 order-md-last m-t-120  mx-auto d-block">
+			{% for add in address %}
+            
+			<h4>Shipping address</h4> <br>
+			<span>{{add.street_address|truncatewords:7}}</span>
+			<span>{{add.country.name}}({{add.country}})</span>
+			<span>{{add.zip}}</span>
+		
+		{% endfor %}
+          <ul class="list-group mb-3 m-t-50">
+           
+            {% for order_item in order.items.all %}
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+              <div>
+                <h6 class="my-0">{{order_item.quantity}} x {{order_item.item.title}}</h6>
+                <small class="text-muted">{{order_item.item.description|truncatewords:7}}</small>
+              </div>
+              <span class="text-muted">${{order_item.get_final_price|floatformat:2}}</span>
+            </li>
+            {% endfor %}
+			
+            <li class="list-group-item d-flex justify-content-between bg-light">
+              <div class="text-success">
+                <h6 class="my-0 cl1">Promo code</h6>
+                <small class="cl1">{{order.coupon.code}}</small>
+              </div>
+              {% comment %} {% if coupon.amount is 'null' %} {% endcomment %}
+              <span class="text-danger">−${{order.coupon.amount}}</span>
+              {% comment %} {% endif %} {% endcomment %}
+              
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Total (USD)</span>
+              <strong>${{order.get_total|floatformat:2}}</strong>
+            </li>
+            
+          </ul>
+		  {% comment %} <style>
+			#reveal {
+				display: none;
+			  }
+			  
+			  input#show:checked ~ #reveal{
+				display: block;
+			  }
+			  #reveall {
+				display: none;
+			  }
+			  
+			  input#showw:checked ~ #reveall{
+				display: block;
+			  }
+		</style> {% endcomment %}
+		  {% comment %} <form action="" id="paymentForm">
+			<span class="form-check">
+			<input type="radio" id="showw" name="group" class="form-check-input">
+				<span class="form-check-label"> pay with flutterwave</span> <br> <br>
+			
+			
+			<input type="radio" id="show" name="group" class=" form-check-input">
+			<span class="form-check-label "> pay with paystack</span>
+			
+			<input type="button" id="reveall" name="group" value="pay with flutterwave" onclick="makePayment()" class=" stext-101 text-white size-118 bg1 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5 w-100" >
+               
+			
+			<input type="button" id="reveal" name="group" value="pay with paystack"onclick="payWithPaystack()" class=" stext-101 text-white size-118 bg1 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5 w-100" >
+		</span>
+			</form> {% endcomment %}
+			
+			
+			
+          {% comment %} <form class="card p-2">
+            {% csrf_token %}
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Promo code" control-id="ControlID-1">
+              <button type="submit" class="btn btn-secondary" control-id="ControlID-2">Redeem</button>
+            </div>
+          </form> {% endcomment %}
+          <input type="button" id="reveal" name="group" value="pay with paystack"onclick="payWithPaystack()" class=" stext-101 text-white size-118 bg1 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5 w-100" >
+         </div>
+        
+      </div>
+    </main>
+  
+    
+  </div>
+  <footer class="bg3 p-t-75 p-b-32 m-t-100">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						Categories
+					</h4>
+
+					<ul>
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Women
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Men
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Shoes
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Watches
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						Help
+					</h4>
+
+					<ul>
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Track Order
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Returns 
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Shipping
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								FAQs
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						GET IN TOUCH
+					</h4>
+
+					<p class="stext-107 cl7 size-201">
+						Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+					</p>
+
+					<div class="p-t-27">
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-facebook"></i>
+						</a>
+
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-instagram"></i>
+						</a>
+
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-pinterest-p"></i>
+						</a>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						Newsletter
+					</h4>
+
+					<form>
+						<div class="wrap-input1 w-full p-b-4">
+							<input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="email@example.com">
+							<div class="focus-input1 trans-04"></div>
+						</div>
+
+						<div class="p-t-18">
+							<button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
+								Subscribe
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="p-t-40">
+				<div class="flex-c-m flex-w p-b-18">
+					<a href="#" class="m-all-1">
+						<img src=" {% static 'images/icons/icon-pay-01.png' %} " alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src=" {% static 'images/icons/icon-pay-02.png' %} " alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src=" {% static 'images/icons/icon-pay-03.png' %} " alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src=" {% static 'images/icons/icon-pay-04.png' %} " alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src=" {% static 'images/icons/icon-pay-05.png' %} " alt="ICON-PAY">
+					</a>
+				</div>
+
+				<p class="stext-107 cl6 txt-center">
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+ <script
+  type="text/javascript"
+  src="https://checkout.flutterwave.com/v3.js"
+></script> 
+<script type='text/javascript' src="https://js.paystack.co/v1/inline.js"></script> 
+
+<script>
+	let cart_total="{{order.get_total}}"
+	let cus_name ="{{user.username}}"
+	let cus_id= "{{user.id}}"
+	
+		function makePayment() {
+			FlutterwaveCheckout({
+			public_key: "FLWPUBK_TEST-SANDBOXDEMOKEY-X",
+			tx_ref: "coza-48981487343MDI0NzMx",
+			amount: cart_total,
+			currency: "USD",
+			payment_options: "card, mobilemoneyghana, ussd",
+			redirect_url: "http://localhost:8000",
+			meta: {
+				consumer_id: cus_id,
+				consumer_mac: "92a3-912ba-1192a",
+			},
+			customer: {
+				email: "rose@unsinkableship.com",
+				phone_number: "08102909304",
+				name: "cus_name",
+			},
+			customizations: {
+				title: "coza master Store",
+				description: "Payment for an awesome cruise",
+				logo: "https://www.logolynx.com/images/logolynx/22/2239ca38f5505fbfce7e55bbc0604386.jpeg",
+			},
+			});
+		}
+</script>
+ 
+<script>
+
+    let cart_price="{{order.get_total|floatformat:2}}"
+
+    
+    function payWithPaystack() {
+    var handler = PaystackPop.setup({
+        key: 'pk_test_1436efe3271ff22648767e9c62555d26bf63a832', // Replace with your public key
+        email: "princeartistik@gmail.com",
+        amount: cart_price*100, // the amount value is multiplied by 100 to convert to the lowest currency unit
+        currency: 'NGN', // Use GHS for Ghana Cedis or USD for US Dollars
+        ref: ''+Math.floor((Math.random() * 1000000000) + 1), // Replace with a reference you generated
+        callback: function(response) {
+        //this happens after the payment is completed successfully
+        var reference = response.reference;
+        alert('Payment complete! Reference: ' + reference);
+        // Make an AJAX call to your server with the reference to verify the transaction
+        },
+        onClose: function() {
+        alert('Transaction was not completed, window closed.');
+        },
+    });
+    handler.openIframe();
+    }
+</script>
+
+{% endblock %}

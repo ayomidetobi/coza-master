@@ -264,13 +264,13 @@
 			</div>
 		</div>
 	</div>
-<div class="container m-t-100">
+<div class="container m-t-10">
 
     <main>
     
   
       <div class="row g-5">
-        <div class="col-md-12 col-lg-12 order-md-last m-t-120 w-50 mx-auto d-block">
+        <div class="col-md-12 col-lg-6 order-md-last m-t-120  mx-auto d-block">
 			{% for add in address %}
             
 			<h4>Shipping address</h4> <br>
@@ -285,9 +285,9 @@
             <li class="list-group-item d-flex justify-content-between lh-sm">
               <div>
                 <h6 class="my-0">{{order_item.quantity}} x {{order_item.item.title}}</h6>
-                <small class="text-muted">{{order_item.item.description}}</small>
+                <small class="text-muted">{{order_item.item.description|truncatewords:7}}</small>
               </div>
-              <span class="text-muted">${{order_item.get_final_price}}</span>
+              <span class="text-muted">${{order_item.get_final_price|floatformat:2}}</span>
             </li>
             {% endfor %}
 			
@@ -304,7 +304,7 @@
             </li>
             
           </ul>
-		  <style>
+		  {% comment %} <style>
 			#reveal {
 				display: none;
 			  }
@@ -319,8 +319,8 @@
 			  input#showw:checked ~ #reveall{
 				display: block;
 			  }
-		</style>
-		  <form action="" id="paymentForm">
+		</style> {% endcomment %}
+		  {% comment %} <form action="" id="paymentForm">
 			<span class="form-check">
 			<input type="radio" id="showw" name="group" class="form-check-input">
 				<span class="form-check-label"> pay with flutterwave</span> <br> <br>
@@ -334,7 +334,7 @@
 			
 			<input type="button" id="reveal" name="group" value="pay with paystack"onclick="payWithPaystack()" class=" stext-101 text-white size-118 bg1 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5 w-100" >
 		</span>
-			</form>
+			</form> {% endcomment %}
 			
 			
 			
@@ -345,6 +345,7 @@
               <button type="submit" class="btn btn-secondary" control-id="ControlID-2">Redeem</button>
             </div>
           </form> {% endcomment %}
+		  <input type="button" id="reveall" name="group" value="pay with flutterwave" onclick="makePayment()" class=" stext-101 text-white size-118 bg1 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5 w-100" >
         </div>
         
       </div>

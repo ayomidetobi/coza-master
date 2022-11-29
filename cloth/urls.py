@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import index,about,product,home_02,product_detail,home_03,shoping_cart,contact,blog_details,blog,remove_from_cart,remove_single_item_from_cart,AddCouponView,add_to_cart,Checkout,signup,RequestRefundView,PaymentView
+from .views import index,about,product,home_02,product_detail,home_03,shoping_cart,contact,blog_details,blog,remove_from_cart,remove_single_item_from_cart,AddCouponView,PaystackView,add_to_cart,Checkout,signup,RequestRefundView,PaymentView
 
 app_name = 'cloth'
 
@@ -21,7 +21,8 @@ urlpatterns = [
     path('remove-from-cart/<slug>/', remove_from_cart, name='remove-from-cart'),
     path('remove-item-from-cart/<slug>/', remove_single_item_from_cart,name='remove-single-item-from-cart'),
     path('checkout', Checkout.as_view(), name="checkout"),
-    path('payment/<payment_option>/', PaymentView.as_view(), name='payment'),
+    path('payment/Flutterwave', PaymentView.as_view(), name='payment'),
+    path('payment/Paystack', PaystackView.as_view(), name='paystack'),
     path('request-refund/', RequestRefundView.as_view(), name='request-refund')
 
 

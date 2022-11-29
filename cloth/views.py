@@ -4,7 +4,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist,ValidationError
 from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
@@ -16,8 +16,11 @@ from .models import Item, OrderItem, Order, Address, Payment, Coupon, Refund, Us
 from .forms import RefundForm,CouponForm,CheckoutForm
 from djangoflutterwave.models import FlwPlanModel
 
-# Create your views here.
-# class index(TemplateView):
+
+
+
+
+
 
 #     template_name = 'index.html'
 class index(ListView):
@@ -34,7 +37,7 @@ class contact(TemplateView):
     template_name= 'contact.html'
 
 class product_detail(DetailView):
-    model= Item
+    model= (Item)
     template_name= 'product_detail.html'
 
 class blog(TemplateView):
@@ -46,7 +49,8 @@ class home_02(TemplateView):
 class home_03(TemplateView):
     template_name= 'home_03.html'
 
-class product(TemplateView):
+class product(ListView):
+    model= Item
     template_name= 'product.html'
 
 def signup(request):
@@ -60,7 +64,7 @@ def signup(request):
             user = authenticate( username=username, password=password)
             user.save()
             login(request, user)
-            return redirect('cloth:product')
+            return redirect('cloth:shoping-cart')
         else:
             messages.error(request, 'an error occurred while creating')
 
@@ -231,9 +235,9 @@ class Checkout(LoginRequiredMixin,View):
                 payment_option = form.cleaned_data.get('payment_option')
 
                 if payment_option == 'F':
-                    return redirect('cloth:payment', payment_option='stripe')
+                    return redirect('cloth:payment')
                 elif payment_option == 'P':
-                    return redirect('cloth:payment', payment_option='paypal')
+                    return redirect('cloth:paystack')
                 else: 
                     messages.warning(
                         self.request, "Invalid payment option selected")
@@ -384,9 +388,30 @@ class AddCouponView(View):
                 messages.info(self.request, "You do not have an active order")
                 return redirect("cloth:shoping-cart")
 
-class PaymentView(TemplateView):
+
+class PaystackView(TemplateView):
     model= Address
     
+    def get(self, *args, **kwargs):
+        try:
+            order = Order.objects.get(user=self.request.user, ordered=False)
+            address=Address.objects.filter(user=self.request.user)
+            form = CheckoutForm()
+            context = {
+                'form': form,
+                'couponform': CouponForm(),
+                'order': order,
+                'DISPLAY_COUPON_FORM': True,
+                'address': address
+            }
+            return render(self.request, 'paystack.html',context)
+        except ObjectDoesNotExist:
+            messages.info(self.request, "You do not have an active order")
+            return redirect("cloth:checkout")
+class PaymentView(TemplateView):
+    model= Address
+
+
     def get(self, *args, **kwargs):
         try:
             order = Order.objects.get(user=self.request.user, ordered=False)

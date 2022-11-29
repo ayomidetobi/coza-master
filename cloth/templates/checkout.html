@@ -308,14 +308,19 @@
             </div>
           </form> {% endcomment %}
         </div>
+
+
+
+
+		
         <div class="col-md-7 col-lg-8">
           <h4 class="mb-3">Billing address</h4>
-          <form class="needs-validation" novalidate="" method="POST">
+          <form class="needs-validation"  method="POST" novalidate>
 			{% csrf_token %}
             <div class="row g-3">
               <div class="col-sm-6">
-                <label for="firstName" class="form-label">First name</label>
-                <input type="text" class="form-control stext-111 w-100 cl8 plh3 size-111 p-lr-15" id="firstName" placeholder="" value="{{user.first_name}}" required="" control-id="ControlID-3">
+                <label for="firstName" class="form-label" for="validationCustom01">First name</label>
+                <input type="text" class="form-control stext-111 w-100 cl8 plh3 size-111 p-lr-15" id="validationCustom01" placeholder="" value="{{user.first_name}}" required="" control-id="ControlID-3">
                 <div class="invalid-feedback">
                   Valid first name is required.
                 </div>
@@ -428,7 +433,7 @@
 
               </div>
 			  
-			  <button class="w-100 flex-c-m stext-101 text-dark size-118 bg2 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5 mx-auto d-block" type="submit" control-id="ControlID-20">Continue to checkout</button> 
+			  <button class="w-100 flex-c-m stext-101 text-dark size-118 bg2 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5 mx-auto d-block" type="submit" >Continue to checkout</button> 
             </div>
   
            
