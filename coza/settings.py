@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'cloudinary',
     "whitenoise.runserver_nostatic",
     'crispy_forms',
-    "crispy_bootstrap5",
+    
 ]
 
 MIDDLEWARE = [
